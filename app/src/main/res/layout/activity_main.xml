@@ -10,11 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.hecz.btrain.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
     <com.hecz.btrain.AnimationImageView
         android:id="@+id/obrazek"
         android:layout_width="wrap_content"
@@ -22,4 +17,46 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:src="@drawable/excersise_big" />
+
+    <Button
+        android:id="@+id/button_less"
+        android:text="@string/button_less"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="31dp"
+        android:layout_toLeftOf="@+id/obrazek"
+        android:layout_toStartOf="@+id/obrazek" />
+    
+    <Button
+        android:id="@+id/button_more"
+        android:text="@string/button_more"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignBaseline="@+id/button_less"
+        android:layout_alignBottom="@+id/button_less"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewBreathVelocity"
+        android:layout_alignBaseline="@+id/button_less"
+        android:layout_alignBottom="@+id/button_less"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp"
+        android:id="@+id/textViewBreathPhase" />
+
+
 </RelativeLayout>
+

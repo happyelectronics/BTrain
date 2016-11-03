@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BTrain</string>
+    <string name="text_inhalate">Inhalate</string>
+    <string name="text_exhalate">Exhalate</string>
+    <string name="text_hold">Hold</string>
+    <string name="button_less">Less</string>
+    <string name="button_more">More</string>
 </resources>

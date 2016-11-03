@@ -19,6 +19,8 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -37,6 +39,14 @@ public class ExerciseController {
             "13;1300;200;2800;200",
             "14;1200;200;2500;200"
     };
+
+    private static final int BREATH_INHALATE = 0;
+    private static final int BREATH_HOLD = 1;
+    private static final int BREATH_EXHALATE = 2;
+
+    private int breathPhase;
+
+    protected TextView textViewBreathPhase;
 
 	private static final int BREATH_REGULAR = 0;
 	private static final int BREATH_HOLDING = 1;
@@ -65,8 +75,8 @@ public class ExerciseController {
     private int currentBreathing = 5000;
     private int breathingDuration = 5000;
 
-    public ExerciseController(Activity _activity) {
-
+    public ExerciseController(Activity _activity, final TextView textViewBreathPhase) {
+        this.textViewBreathPhase = textViewBreathPhase;
         Log.i(Global.APP_LOG_PREFIX + "ZEN", "ExerciseController");
         instance = this;
         this.activity = _activity;
@@ -196,6 +206,22 @@ public class ExerciseController {
 
         // scaler.setRepeatCount(Animation.INFINITE);
         scalerExhale.setRepeatCount(0);
+        scalerExhale.setAnimationListener(new AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                textViewBreathPhase.setText(R.string.text_exhalate);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                textViewBreathPhase.setText(R.string.text_inhalate);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                //textViewBreathPhase.setText(R.string.text_exhalate);
+            }
+        });
 
         // scaler.setRepeatMode(Animation.REVERSE);
 
@@ -204,6 +230,22 @@ public class ExerciseController {
                 0.5f);
 
         scalerInhale.setRepeatCount(0);
+        scalerInhale.setAnimationListener(new AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                //textViewBreathPhase.setText(R.string.text_inhalate);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                //textViewBreathPhase.setText(R.string.text_exhalate);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                //textViewBreathPhase.setText(R.string.text_inhalate);
+            }
+        });
 
         durationInhale = getDuration();
         Log.i(Global.APP_LOG_PREFIX + "ZEN", "isZen = " + Global.isZen
@@ -237,11 +279,15 @@ public class ExerciseController {
         as.setAnimationListener(new AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+                //textViewBreathPhase.setText(R.string.text_exhalate);
             }
+
 
             @Override
             public void onAnimationRepeat(Animation animation) {
+                //textViewBreathPhase.setText(R.string.text_exhalate);
                 // Log.i("Repeat anim");
+
             }
 
             @Override
@@ -259,9 +305,9 @@ public class ExerciseController {
             }
         });
 
-
         as.addAnimation(scalerExhale);
         as.addAnimation(scalerInhale);
+
 
         if (imageCoach != null) {
             Log.i(Global.APP_LOG_PREFIX + "ZEN", "III - imageCoach = " + imageCoach.getWidth());
@@ -554,6 +600,10 @@ public class ExerciseController {
 
     public void setBreathingDuration(int breathingDuration) {
         this.breathingDuration = breathingDuration;
+    }
+
+    public int getBreathPhase(){
+        return breathPhase;
     }
 
     public int getBreathingDuration() {

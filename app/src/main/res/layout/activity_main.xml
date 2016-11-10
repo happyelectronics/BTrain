@@ -92,13 +92,23 @@
         tools:context="com.hecz.btrain.MainActivity"
         android:visibility="gone">
 
-    <com.hecz.btrain.AnimationImageView
+        <com.hecz.btrain.AnimationImageView
+            android:id="@+id/silueta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/excersise_big_silhouette"/>
+
+
+        <com.hecz.btrain.AnimationImageView
         android:id="@+id/obrazek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:src="@drawable/excersise_big" />
+
 
     <Button
         android:id="@+id/button_less"

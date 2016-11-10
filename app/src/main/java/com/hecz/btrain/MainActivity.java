@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
     private AppCompatActivity activity;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         this.activity = this;
         prefs = PreferenceManager.getDefaultSharedPreferences(this);

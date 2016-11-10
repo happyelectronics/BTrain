@@ -92,6 +92,7 @@
         tools:context="com.hecz.btrain.MainActivity"
         android:visibility="gone">
 
+
         <com.hecz.btrain.AnimationImageView
             android:id="@+id/silueta"
             android:layout_width="wrap_content"

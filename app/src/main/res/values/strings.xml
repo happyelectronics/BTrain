@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">BTrain</string>
+    <string name="text_button_menu1">Relax</string>
+    <string name="text_button_menu2">Medium</string>
+    <string name="text_button_menu3">Strong</string>
+    <string name="text_button_menu4">About application</string>
+    <string name="text_button_menu5">End application</string>
     <string name="text_inhalate">Inhalate</string>
     <string name="text_exhalate">Exhalate</string>
     <string name="text_hold">Hold</string>
     <string name="button_less">Less</string>
     <string name="button_more">More</string>
+    <string name="cannot_less">Less value cannot be settled!</string>
+    <string name="cannot_more">Greater value cannot be settled!</string>
+    <string name="text_about_application">BTrain alfa version\nHappy electronics s.r.o.</string>
+    <string name="ok">OK</string>
 </resources>

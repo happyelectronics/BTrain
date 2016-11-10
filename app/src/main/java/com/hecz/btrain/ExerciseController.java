@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 public class ExerciseController {
+
     // time/min;inhale;hold;exhale;hold
     String[] bhold = {
             "5;3600;600;7200;600",
@@ -45,6 +46,8 @@ public class ExerciseController {
     private static final int BREATH_EXHALATE = 2;
 
     private int breathPhase;
+
+    private int breathingLevel = 5;
 
     protected TextView textViewBreathPhase;
 
@@ -67,6 +70,8 @@ public class ExerciseController {
 	private int currentVolume;
 	private ScaleAnimation scalerExhale;
 	private ScaleAnimation scalerInhale;
+    private ScaleAnimation scalerHold;
+
 	protected boolean isNewDuration = false;
 
 	public int breathingType = BREATH_REGULAR;
@@ -84,6 +89,7 @@ public class ExerciseController {
         PreferenceManager.setDefaultValues(activity, R.xml.preferences, false);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+
 
         //TODO predelat, tady se vybiralo ze skupiny dechu
         int iBreathingPos = 0;
@@ -224,7 +230,6 @@ public class ExerciseController {
         });
 
         // scaler.setRepeatMode(Animation.REVERSE);
-
         scalerInhale = new ScaleAnimation(1.0f, 10.0f, 1.0f, 10.0f,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
                 0.5f);
@@ -257,6 +262,25 @@ public class ExerciseController {
 
         // scaler3.setDuration(duration3);
         // scaler3.setStartOffset(duration2+hold1+hold2);
+
+        scalerHold = new ScaleAnimation(1.0f, 1.0f, 1.0f, 1.0f,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.5f);
+
+        durationHold = getDuration();
+        if (Global.isZen) {
+            durationHold = (int) (Global.timeMaxLf / 2);
+        }
+        hold1 = 0;
+        hold2 = 0;
+
+        // scaler.setStartOffset(hold1);
+        // scaler.setDuration(duration2);
+
+        // scaler.setStartTime(duration2 / 2);
+
+        // scaler.setRepeatCount(Animation.INFINITE);
+        scalerExhale.setRepeatCount(0);
 
         setScalers();
 
@@ -556,8 +580,9 @@ public class ExerciseController {
 	private AnimationSet as;
 	private int hold1 = 0;
 	private int hold2 = 20;
-	private int durationInhale = 5000;
-	private int durationExhale = 5000;
+	private int durationInhale = 3600;
+	private int durationExhale = 7200;
+    private int durationHold = 500;
 
 	protected void restartAnimation() {
 		if (isNewDuration) {
@@ -608,5 +633,64 @@ public class ExerciseController {
 
     public int getBreathingDuration() {
         return breathingDuration;
+    }
+
+    public int getBreathingLevel(){
+        return breathingLevel;
+    }
+    public void setBreathingLevel(int number){
+        if(number >= 5 && number <= 14) breathingLevel = number;
+        switch(number){
+            case 5:
+                durationInhale = 3600;
+                durationExhale = 7200;
+                durationHold = 600;
+                break;
+            case 6:
+                durationInhale = 3000;
+                durationExhale = 6000;
+                durationHold = 600;
+                break;
+            case 7:
+                durationInhale = 2500;
+                durationExhale = 5100;
+                durationHold = 400;
+                break;
+            case 8:
+                durationInhale = 2200;
+                durationExhale = 4500;
+                durationHold = 300;
+                break;
+            case 9:
+                durationInhale = 1900;
+                durationExhale = 4000;
+                durationHold = 300;
+                break;
+            case 10:
+                durationInhale = 1800;
+                durationExhale = 3600;
+                durationHold = 300;
+                break;
+            case 11:
+                durationInhale = 1600;
+                durationExhale = 3200;
+                durationHold = 200;
+                break;
+            case 12:
+                durationInhale = 1500;
+                durationExhale = 3000;
+                durationHold = 200;
+                break;
+            case 13:
+                durationInhale = 1300;
+                durationExhale = 2800;
+                durationHold = 200;
+                break;
+            case 14:
+                durationInhale = 1200;
+                durationExhale = 2500;
+                durationHold = 200;
+                break;
+        }
     }
 }

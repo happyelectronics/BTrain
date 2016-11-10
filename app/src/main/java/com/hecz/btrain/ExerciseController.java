@@ -10,6 +10,7 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -79,6 +80,9 @@ public class ExerciseController {
     private int currentBreathing = 5000;
     private int breathingDuration = 5000;
 
+    private MediaPlayer mpInhalate;
+    private MediaPlayer mpExhalate;
+
 
     public ExerciseController(Activity _activity, final TextView textViewBreathPhase) {
         this.textViewBreathPhase = textViewBreathPhase;
@@ -90,6 +94,8 @@ public class ExerciseController {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(activity);
 
+        mpInhalate = MediaPlayer.create(this.activity,R.raw.inhalate);
+        mpExhalate = MediaPlayer.create(this.activity,R.raw.exhalate);
 
         //TODO predelat, tady se vybiralo ze skupiny dechu
         int iBreathingPos = 0;
@@ -144,7 +150,6 @@ public class ExerciseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         imageCoach = (AnimationImageView) activity.findViewById(R.id.obrazek);
 
 		/*buttonSound = (ImageButton) activity.findViewById(R.id.proImageButton1);
@@ -214,7 +219,7 @@ public class ExerciseController {
         scalerExhale.setAnimationListener(new AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                //textViewBreathPhase.setText(R.string.text_exhalate);
+                mpExhalate.start();
             }
 
             @Override
@@ -242,6 +247,7 @@ public class ExerciseController {
         scalerInhale.setAnimationListener(new AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+                mpInhalate.start();
             }
 
             @Override
@@ -325,6 +331,7 @@ public class ExerciseController {
         textViewBreathPhase.setText(R.string.text_exhalate);
         scalerExhale.setDuration(durationExhale);
         imageCoach.startAnimation(scalerExhale);
+
 
 
         if (imageCoach != null) {
@@ -684,5 +691,10 @@ public class ExerciseController {
                 durationHold = 200;
                 break;
         }
+    }
+
+    public void stopMediaPlayers(){
+        mpInhalate.stop();
+        mpExhalate.stop();
     }
 }
